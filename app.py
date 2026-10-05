@@ -25,6 +25,17 @@ app = FastAPI(
     version="1.0.0"
 )
 
+from fastapi.middleware.cors import CORSMiddleware
+
+frontend_url = os.getenv("FRONTEND_URL", "https://creator-os-frontend-six.vercel.app")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[frontend_url, "http://localhost:5173", "http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 # =========================================================
 # 2. REQUEST MODELS
